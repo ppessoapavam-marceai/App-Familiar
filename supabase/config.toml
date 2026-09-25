@@ -1,0 +1,6 @@
+project_id = "cqrusfvucowybgzprlmu"
+
+# O Telegram não envia login do Supabase, então o webhook não exige JWT.
+# A segurança vem do segredo enviado no cabeçalho X-Telegram-Bot-Api-Secret-Token.
+[functions.telegram-webhook]
+verify_jwt = false
