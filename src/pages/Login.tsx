@@ -35,10 +35,9 @@ export function Login() {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="card w-full max-w-sm p-8">
-        <h1 className="mb-1 text-2xl font-semibold">Entrar</h1>
-        <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-          Acesse a agenda, financeiro e tarefas da família.
-        </p>
+        <p className="mb-2 text-3xl">🏡</p>
+        <h1 className="mb-1 text-2xl font-semibold">Bem-vindo de volta</h1>
+        <p className="mb-6 text-sm muted">Agenda, financeiro e tarefas da família.</p>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="label">E-mail</label>
@@ -48,12 +47,12 @@ export function Login() {
             <label className="label">Senha</label>
             <input name="password" type="password" required className="input" />
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
+          {error && <p className="text-sm text-rose-700">{error}</p>}
           <button type="submit" disabled={pending} className="btn">
             {pending ? 'Entrando...' : 'Entrar'}
           </button>
         </form>
-        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-6 text-center text-sm muted">
           Ainda não tem conta?{' '}
           <Link to="/signup" className="font-medium underline">
             Cadastre-se

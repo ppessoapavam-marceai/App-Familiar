@@ -1,10 +1,11 @@
 import { useState, type FormEvent } from 'react'
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, useSearchParams } from 'react-router-dom'
 import { supabase } from '../lib/supabase'
 import { useAuth } from '../auth/AuthProvider'
 
 export function Signup() {
   const { session } = useAuth()
+  const [params] = useSearchParams()
   const [error, setError] = useState<string | null>(null)
   const [info, setInfo] = useState<string | null>(null)
   const [pending, setPending] = useState(false)
@@ -52,10 +53,9 @@ export function Signup() {
   return (
     <div className="flex min-h-screen items-center justify-center px-4">
       <div className="card w-full max-w-sm p-8">
+        <p className="mb-2 text-3xl">💌</p>
         <h1 className="mb-1 text-2xl font-semibold">Criar conta</h1>
-        <p className="mb-6 text-sm text-slate-500 dark:text-slate-400">
-          Peça o código de convite da família para quem já usa o app.
-        </p>
+        <p className="mb-6 text-sm muted">Entre para a família com o código de convite.</p>
         <form onSubmit={onSubmit} className="space-y-4">
           <div>
             <label className="label">Seu nome</label>
@@ -71,15 +71,15 @@ export function Signup() {
           </div>
           <div>
             <label className="label">Código de convite da família</label>
-            <input name="inviteCode" required className="input" />
+            <input name="inviteCode" required defaultValue={params.get('code') ?? ''} className="input" />
           </div>
-          {error && <p className="text-sm text-red-600">{error}</p>}
-          {info && <p className="text-sm text-emerald-600">{info}</p>}
+          {error && <p className="text-sm text-rose-700">{error}</p>}
+          {info && <p className="text-sm text-emerald-700">{info}</p>}
           <button type="submit" disabled={pending} className="btn">
             {pending ? 'Criando...' : 'Criar conta'}
           </button>
         </form>
-        <p className="mt-6 text-center text-sm text-slate-500 dark:text-slate-400">
+        <p className="mt-6 text-center text-sm muted">
           Já tem conta?{' '}
           <Link to="/login" className="font-medium underline">
             Entrar
