@@ -16,7 +16,9 @@ App familiar (React + Vite + Supabase). Qualquer pessoa da família manda uma me
    insert into public.families (name, invite_code) values ('Nome da Família', 'codigo-secreto');
    ```
 3. **Auth:** em Authentication > Providers > Email, desative "Confirm email" se não quiser exigir confirmação por e-mail.
-4. **Front-end:** copie `.env.example` para `.env.local` e preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_KEY` (Project Settings > API). Depois `npm install` e `npm run dev`.
+4. **Front-end:** copie `.env.example` para `.env.local` e preencha `VITE_SUPABASE_URL` e `VITE_SUPABASE_ANON_PUBLIC` (Project Settings > API — é a chave "anon" / "publishable"). Depois `npm install` e `npm run dev`.
+
+   > No Vercel, a Vercel bloqueia salvar uma variável com prefixo público (`VITE_`) se o nome contiver "KEY" — por isso o nome é `VITE_SUPABASE_ANON_PUBLIC`, não `..._KEY`.
 5. **Segredos do robô** (Edge Functions > Secrets): `OPENAI_API_KEY`, `TELEGRAM_BOT_TOKEN`, `TELEGRAM_WEBHOOK_SECRET` (opcional: `OPENAI_MODEL`).
 6. **Publicar a função:** `supabase functions deploy telegram-webhook --project-ref SEU-PROJETO` (o `config.toml` já desliga a exigência de JWT, que o Telegram não envia).
 7. **Webhook do Telegram:** `node scripts/set-telegram-webhook.mjs https://SEU-PROJETO.supabase.co` (com `TELEGRAM_BOT_TOKEN` e `TELEGRAM_WEBHOOK_SECRET` no ambiente).
